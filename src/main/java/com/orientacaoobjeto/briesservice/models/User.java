@@ -9,21 +9,21 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity()
+@Entity
 @Table(name="users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    private Long cpfUsuario;
+    private Long cpf;
 
-    private String telefone;
+    private String phone;
 
-    private Integer admin;
+    private String permission;
 }
