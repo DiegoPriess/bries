@@ -15,13 +15,18 @@ public class UserController {
     UserService service;
 
     @PostMapping("/save")
-    public User createUser(@RequestBody User user){
-        service.saveUser(user);
+    public User create(@RequestBody User user){
+        service.save(user);
         return user;
     }
 
     @GetMapping("/details/{id}")
-    public Optional<User> getUserDetails(@PathVariable Long id) {
+    public Optional<User> getDetails(@PathVariable Long id) {
         return service.getDetails(id);
+    }
+
+    @GetMapping("/auth/{cpf}/{senha}")
+    public boolean authenticate(@PathVariable Long cpf, @PathVariable String senha) {
+        return service.authenticate(cpf, senha);
     }
 }

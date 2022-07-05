@@ -14,11 +14,18 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public void saveUser(User newUser) {
-        this.repository.save(newUser);
+    public void save(@NotNull final User newUser) {
+        repository.save(newUser);
     }
 
     public Optional<User> getDetails(@NotNull final Long id) {
-        return this.repository.findById(id);
+        return repository.findById(id);
+    }
+
+    public boolean authenticate(@NotNull final Long cpf, @NotNull final String password) {
+        if(repository.findByCpfAndPassword(cpf, password) == null){
+            throw new RuntimeException("Usuário ou senha incorreta");
+        }
+        return true;
     }
 }
