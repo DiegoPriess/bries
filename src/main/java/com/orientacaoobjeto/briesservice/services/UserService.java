@@ -6,6 +6,7 @@ import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.NoPermissionException;
 import java.util.Optional;
 
 @Service
@@ -22,9 +23,9 @@ public class UserService {
         return repository.findById(id);
     }
 
-    public boolean authenticate(@NotNull final Long cpf, @NotNull final String password) {
+    public boolean authenticate(@NotNull final Long cpf, @NotNull final String password) throws NoPermissionException {
         if(repository.findByCpfAndPassword(cpf, password) == null){
-            throw new RuntimeException("Usuário ou senha incorreta");
+            throw new NoPermissionException("Usuário ou senha incorreta");
         }
         return true;
     }

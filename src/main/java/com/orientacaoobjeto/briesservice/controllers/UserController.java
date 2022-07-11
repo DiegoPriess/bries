@@ -3,8 +3,11 @@ package com.orientacaoobjeto.briesservice.controllers;
 import com.orientacaoobjeto.briesservice.models.User;
 import com.orientacaoobjeto.briesservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NoPermissionException;
 import java.util.Optional;
 
 @RestController
@@ -26,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/auth/{cpf}/{senha}")
-    public boolean authenticate(@PathVariable Long cpf, @PathVariable String senha) {
+    public boolean authenticate(@PathVariable Long cpf, @PathVariable String senha) throws NoPermissionException {
         return service.authenticate(cpf, senha);
     }
 }
