@@ -30,5 +30,5 @@ public class Item implements Serializable {
 
     @NotNull
     @Column(name="amount_stock")
-    private String amountStock;
+    private Integer amountStock;
 }

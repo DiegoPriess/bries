@@ -20,11 +20,11 @@ public class ItemService {
     @Autowired
     UserService userService;
 
-    public void save(@NotNull final Item newItem) throws NoPermissionException {
+    public void save(@NotNull final Item newItem) {
         repository.save(newItem);
     }
 
-    public Optional<Item> getDetails(@NotNull final Long id) {
-        return repository.findById(id);
+    public Item getDetails(@NotNull final Long id) {
+        return repository.findById(id).get();
     }
 }

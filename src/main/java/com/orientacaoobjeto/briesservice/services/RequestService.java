@@ -20,7 +20,7 @@ public class RequestService {
         repository.save(newRequest);
     }
 
-    public Optional<Request> getDetails(@NotNull final Long id) {
-        return repository.findById(id);
+    public Request getDetails(@NotNull final Long id) {
+        return repository.findById(id).get();
     }
 }
