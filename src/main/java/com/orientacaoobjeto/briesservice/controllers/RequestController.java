@@ -1,6 +1,7 @@
 package com.orientacaoobjeto.briesservice.controllers;
 
 import com.orientacaoobjeto.briesservice.models.Item;
+import com.orientacaoobjeto.briesservice.models.ListItemRequestDTO;
 import com.orientacaoobjeto.briesservice.models.Request;
 import com.orientacaoobjeto.briesservice.models.RequestItems;
 import com.orientacaoobjeto.briesservice.services.ItemService;
@@ -8,11 +9,14 @@ import com.orientacaoobjeto.briesservice.services.RequestItemsService;
 import com.orientacaoobjeto.briesservice.services.RequestService;
 import com.orientacaoobjeto.briesservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.NoPermissionException;
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/request")
@@ -48,8 +52,8 @@ public class RequestController {
         return newRequestItem;
     }
 
-    @GetMapping("/listItems/{id}")
-    public Request listItems(@PathVariable Long id) {
-        return service.getDetails(id);
+    @GetMapping("/listRequestItems/{id}")
+    public List<ListItemRequestDTO> listRequestItems(@PathVariable Long id) {
+        return requestItemsService.getItemsByRequest(id);
     }
 }

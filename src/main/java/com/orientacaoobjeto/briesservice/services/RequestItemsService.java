@@ -1,13 +1,15 @@
 package com.orientacaoobjeto.briesservice.services;
 
 import com.orientacaoobjeto.briesservice.models.Item;
+import com.orientacaoobjeto.briesservice.models.ListItemRequestDTO;
 import com.orientacaoobjeto.briesservice.models.RequestItems;
 import com.orientacaoobjeto.briesservice.repository.RequestItemsRepository;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.naming.NoPermissionException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RequestItemsService {
@@ -41,5 +43,15 @@ public class RequestItemsService {
         Item item = itemService.getDetails(itemId);
         item.setAmountStock(item.getAmountStock() - amount);
         itemService.save(item);
+    }
+
+    public List<ListItemRequestDTO> getItemsByRequest(@NotNull final Long requestId) {
+        List<RequestItems> listRequestItem = repository.findByRequestId(requestId);
+        List<ListItemRequestDTO> listItems = new ArrayList<>();
+        listRequestItem.stream().forEach(requestItems -> {
+            listItems.add( new ListItemRequestDTO(requestItems.getItem(), requestItems.getAmount()));
+        });
+
+        return listItems;
     }
 }
