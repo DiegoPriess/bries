@@ -1,5 +1,6 @@
-package com.orientacaoobjeto.briesservice.models;
+package com.orientacaoobjeto.briesservice.models.dto;
 
+import com.orientacaoobjeto.briesservice.models.Item;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

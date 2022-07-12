@@ -2,6 +2,7 @@ package com.orientacaoobjeto.briesservice.controllers;
 
 import com.orientacaoobjeto.briesservice.models.Item;
 import com.orientacaoobjeto.briesservice.models.Request;
+import com.orientacaoobjeto.briesservice.models.User;
 import com.orientacaoobjeto.briesservice.services.ItemService;
 import com.orientacaoobjeto.briesservice.services.RequestService;
 import com.orientacaoobjeto.briesservice.services.UserService;
@@ -22,5 +23,10 @@ public class ItemController {
     public Item create(@RequestBody Item newItem) throws NoPermissionException {
         service.save(newItem);
         return newItem;
+    }
+
+    @GetMapping("/details/{id}")
+    public Item getDetails(@PathVariable Long id) {
+        return service.getDetails(id);
     }
 }

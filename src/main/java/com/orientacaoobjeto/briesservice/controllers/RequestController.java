@@ -1,7 +1,7 @@
 package com.orientacaoobjeto.briesservice.controllers;
 
 import com.orientacaoobjeto.briesservice.models.Item;
-import com.orientacaoobjeto.briesservice.models.ListItemRequestDTO;
+import com.orientacaoobjeto.briesservice.models.dto.ListItemRequestDTO;
 import com.orientacaoobjeto.briesservice.models.Request;
 import com.orientacaoobjeto.briesservice.models.RequestItems;
 import com.orientacaoobjeto.briesservice.services.ItemService;
@@ -55,5 +55,10 @@ public class RequestController {
     @GetMapping("/listRequestItems/{id}")
     public List<ListItemRequestDTO> listRequestItems(@PathVariable Long id) {
         return requestItemsService.getItemsByRequest(id);
+    }
+
+    @GetMapping("/calcTotalRequest/{id}")
+    public Double calcTotalRequest(@PathVariable Long id) {
+        return requestItemsService.calcTotalRequest(id);
     }
 }

@@ -1,7 +1,7 @@
 package com.orientacaoobjeto.briesservice.services;
 
 import com.orientacaoobjeto.briesservice.models.Item;
-import com.orientacaoobjeto.briesservice.models.ListItemRequestDTO;
+import com.orientacaoobjeto.briesservice.models.dto.ListItemRequestDTO;
 import com.orientacaoobjeto.briesservice.models.RequestItems;
 import com.orientacaoobjeto.briesservice.repository.RequestItemsRepository;
 import com.sun.istack.NotNull;
@@ -43,6 +43,15 @@ public class RequestItemsService {
         Item item = itemService.getDetails(itemId);
         item.setAmountStock(item.getAmountStock() - amount);
         itemService.save(item);
+    }
+
+    public Double calcTotalRequest(@NotNull Long requestId) {
+        List<ListItemRequestDTO> items = getItemsByRequest(requestId);
+        Double total = 0.0;
+        for(int i=0; i < items.size(); i++){
+            total += items.get(i).getItem().getPrice() * items.get(i).getAmount();
+        };
+        return total;
     }
 
     public List<ListItemRequestDTO> getItemsByRequest(@NotNull final Long requestId) {
